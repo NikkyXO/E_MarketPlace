@@ -47,8 +47,8 @@ public class JwtFilter extends OncePerRequestFilter{
 		
 		// Check correct format of Auth header
 		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			filterChain.doFilter(request, response);
-			return;
+			filterChain.doFilter(request, response); // pass to next filter
+			return; // discontinue with execution
 		}
 		
 		jwt = authHeader.substring(7);
@@ -59,7 +59,8 @@ public class JwtFilter extends OncePerRequestFilter{
 			
 			var isTokenValid = tokenRepository.findByToken(jwt)
 					.map(t -> !t.isExpired() && !t.isRevoked()).orElse(false);
-			
+
+			// checks jwt not expired and revoked
 			if (jwtService.isTokenValid(jwt, userdetails) && isTokenValid) {
 				UsernamePasswordAuthenticationToken authToken = 
 						new UsernamePasswordAuthenticationToken(userdetails, null, // credentials 

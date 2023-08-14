@@ -1,5 +1,4 @@
 package com.nikky.market.config;
-//
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -11,14 +10,15 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
+
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
                         name = "Olanike",
                         email = "alexisdame2017@gmail.com",
-                        url = "https://peju.com/course"
+                        url = "https://peju.com/market"
                 ),
-                description = "OpenApi documentation for Course API",
+                description = "OpenApi documentation for Market API",
                 title = "OpenApi specification - Olapeju",
                 version = "1.0",
                 license = @License(
@@ -27,14 +27,15 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 ),
                 termsOfService = "Terms of service"
         ),
+        
         servers = {
                 @Server(
                         description = "Local ENV",
                         url = "http://localhost:8080"
                 ),
                 @Server(
-                        description = "PROD ENV",
-                        url = "https://aliboucoding.com/course"
+                        description = "DeV ENV",
+                        url = "https://market.com/course"
                 )
         },
         security = {
@@ -52,4 +53,5 @@ import io.swagger.v3.oas.annotations.servers.Server;
         in = SecuritySchemeIn.HEADER
 )
 public class OpenApiConfig {
+	
 }

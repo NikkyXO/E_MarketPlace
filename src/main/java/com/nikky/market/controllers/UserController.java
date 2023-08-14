@@ -1,27 +1,68 @@
 package com.nikky.market.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
+import com.nikky.market.errorHandling.errorClasses.ResourceNotFoundException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import com.nikky.market.entities.User;
 import com.nikky.market.repositories.UserRepository;
 import com.nikky.market.services.impl.UserServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
+@Validated
 public class UserController {
 
-	@Autowired
-	private UserServiceImpl userservice;
+	private final UserServiceImpl userService;
+	private final UserRepository userRepository;
 
-	
-	@PostMapping("/create")
-	public User addUser(@RequestBody User user) {
-		return userservice.saveUser(user);
+
+	@GetMapping("/all")
+	public List<User> listAllUsers() {
+		var userLists = userService.listUsers();
+		if (userLists.isEmpty()) {
+			throw new ResourceNotFoundException("No user Found!");
+		}
+
+		return userLists;
 	}
-	
+
+	@PutMapping(value = "/user/{id}")
+	ResponseEntity<User> update(@PathVariable("id") @Min(1) Long id, @Valid @RequestBody User user) {
+
+		User getUser = userRepository.findById(id)
+				.orElseThrow(()->new ResourceNotFoundException("User with ID :"+id+" Not Found!"));
+
+		user.setId(getUser.getId());
+		userRepository.save(user);
+		return ResponseEntity.ok().body(user);
+
+	}
+
+	@GetMapping(value="/user")
+	ResponseEntity<User> getByUsername(@RequestParam(required=true) String email) {
+
+		User usr = userRepository.findByEmail(email) //findByUsername(username)
+				.orElseThrow(()->new ResourceNotFoundException(email +" NOT Found!"));
+
+		return ResponseEntity.ok().body(usr);
+	}
+
+	@DeleteMapping(value="/user/{id}")
+	ResponseEntity<String> delete(@PathVariable("id") @Min(1) Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(()->new ResourceNotFoundException("User with ID :"+id+" Not Found!"));
+
+		userRepository.deleteById(user.getId());
+		return ResponseEntity.ok().body("Employee deleted with success!");
+
+	}
 }

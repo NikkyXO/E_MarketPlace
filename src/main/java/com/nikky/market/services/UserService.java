@@ -1,5 +1,6 @@
 package com.nikky.market.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ public interface UserService {
 	
 	User saveUser(User user);
 	
-	User updateUser(User user);
+	User updateUser(User user, Long id);
 
 	void deleteUser(Long Id);
+	
+	List<User> listUsers();
 
 }

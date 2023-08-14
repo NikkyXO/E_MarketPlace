@@ -1,7 +1,9 @@
 package com.nikky.market.controllers;
 
 import java.io.IOException;
+import java.net.URI;
 
+import com.nikky.market.authentication.RegisterResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,7 @@ import com.nikky.market.services.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController
@@ -27,16 +29,32 @@ public class AuthController {
   private final AuthenticationService service;
 
   @PostMapping("/register")
-  public ResponseEntity<AuthResponse> register(
+  public ResponseEntity<RegisterResponse> register(
       @RequestBody RegisterRequest request
   ) {
     return ResponseEntity.ok(service.register(request));
   }
+
+//  public ResponseEntity<AuthResponse> register(
+//          @RequestBody RegisterRequest request
+//  )
+//  {
+//    var response = service.register(request);
+//    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+//            .path("/{id}")
+//            .buildAndExpand(response.getCreated_user().getId())
+//            .toUri();
+//
+//    //return ResponseEntity.created(location).build();
+//    return ResponseEntity.ok(response);
+//  }
   @PostMapping("/authenticate")
   public ResponseEntity<AuthResponse> authenticate(
       @RequestBody AuthenticationRequest request
   ) {
+    //ResponseEntity.ok("Hello from secured endpoint")
     return ResponseEntity.ok(service.authenticate(request));
+
   }
 
   @PostMapping("/refresh-token")

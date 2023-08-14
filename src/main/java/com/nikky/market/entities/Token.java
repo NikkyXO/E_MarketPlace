@@ -24,8 +24,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="tokens")
 public class Token {
-	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long Id;

@@ -1,8 +1,8 @@
-package com.nikky.market.authentication;
+package com.nikky.market.controllers.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.nikky.market.entities.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
+public class UserResponse {
 	
-	@JsonProperty("access_token")
-	private String accessToken;
+	@JsonProperty("message")
+	private String message;
 	
-	@JsonProperty("refresh_token")
-	private String refreshToken;
+	@JsonProperty("data")
+	private User user;
 
 }
