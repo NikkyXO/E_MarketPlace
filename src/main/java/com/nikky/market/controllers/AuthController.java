@@ -35,19 +35,6 @@ public class AuthController {
     return ResponseEntity.ok(service.register(request));
   }
 
-//  public ResponseEntity<AuthResponse> register(
-//          @RequestBody RegisterRequest request
-//  )
-//  {
-//    var response = service.register(request);
-//    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-//            .path("/{id}")
-//            .buildAndExpand(response.getCreated_user().getId())
-//            .toUri();
-//
-//    //return ResponseEntity.created(location).build();
-//    return ResponseEntity.ok(response);
-//  }
   @PostMapping("/authenticate")
   public ResponseEntity<AuthResponse> authenticate(
       @RequestBody AuthenticationRequest request

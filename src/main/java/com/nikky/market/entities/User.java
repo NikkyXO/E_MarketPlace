@@ -1,6 +1,7 @@
 package com.nikky.market.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -26,8 +27,8 @@ import java.util.List;
 @Table(name="users")
 public class User implements UserDetails {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+//	@Serial
+//	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,6 +49,7 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
+	@JsonManagedReference // to avoid circular references, to be serialized normally
 	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;
 

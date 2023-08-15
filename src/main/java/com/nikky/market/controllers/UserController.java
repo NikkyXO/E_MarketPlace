@@ -26,13 +26,12 @@ public class UserController {
 
 
 	@GetMapping("/all")
-	public List<User> listAllUsers() {
-		var userLists = userService.listUsers();
-		if (userLists.isEmpty()) {
+	public ResponseEntity<List<User>> listAllUsers() {
+		if (userService.listUsers().isEmpty()) {
 			throw new ResourceNotFoundException("No user Found!");
 		}
 
-		return userLists;
+		return ResponseEntity.ok(userService.listUsers());
 	}
 
 	@PutMapping(value = "/user/{id}")
