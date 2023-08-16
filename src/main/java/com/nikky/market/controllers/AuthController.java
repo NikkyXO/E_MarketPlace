@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 
 import com.nikky.market.authentication.RegisterResponse;
+import com.nikky.market.emails.EmailService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +32,23 @@ public class AuthController {
 
   @PostMapping("/register")
   public ResponseEntity<RegisterResponse> register(
-      @RequestBody RegisterRequest request
+          @RequestBody RegisterRequest request
   ) {
-    return ResponseEntity.ok(service.register(request));
+    var result = service.register(request);
+
+    String Subject = "E-Commerce Application | Account Notification";
+    String Message = "Hi " + request.getFirstName() + ", \n Your Account setup completed \n" +
+            "WAIT FOR APPROVAL\n" + request.getEmail();
+
+    EmailService.sendEmail(request.getEmail(), Subject, Message);
+    //return ResponseEntity.ok(service.register(request), HttpStatus.CREATED);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(result);
   }
 
   @PostMapping("/authenticate")
   public ResponseEntity<AuthResponse> authenticate(
-      @RequestBody AuthenticationRequest request
+          @RequestBody AuthenticationRequest request
   ) {
     //ResponseEntity.ok("Hello from secured endpoint")
     return ResponseEntity.ok(service.authenticate(request));
@@ -46,8 +57,8 @@ public class AuthController {
 
   @PostMapping("/refresh-token")
   public void refreshToken(
-      HttpServletRequest request,
-      HttpServletResponse response
+          HttpServletRequest request,
+          HttpServletResponse response
   ) throws IOException {
     service.refreshToken(request, response);
   }
