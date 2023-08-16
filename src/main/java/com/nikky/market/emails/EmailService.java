@@ -21,17 +21,18 @@ import java.io.IOException;
 public class EmailService {
 
     @Autowired
-    private static JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+
 
     @Async
-    public  static void sendEmail(String to, String subject, String body) {
+    public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         // for  multiple recipients
-        // message.setTo(new String[] {"recipient1@example.com", "recipient2@example.com", "recipient3@example.com"});
+        // message.setTo(new String[] {"recipient1@example.com",
+        // "recipient2@example.com", "recipient3@example.com"});
         message.setSubject(subject);
         message.setText(body);
-        message.setFrom("example@gmail.com");
         mailSender.send(message);
     }
 
@@ -40,9 +41,9 @@ public class EmailService {
 
         message.setFrom(new InternetAddress("sender@example.com"));
         message.setRecipients(MimeMessage.RecipientType.TO, "recipient@example.com");
-        message.setSubject("Test email from Spring");
+        message.setSubject("Test email from E_Marketplace");
 
-        String htmlContent = "<h1>This is a test Spring Boot email</h1>" +
+        String htmlContent = "<h1>This is a test E_Marketplace email</h1>" +
                 "<p>It can contain <strong>HTML</strong> content.</p>";
         message.setContent(htmlContent, "text/html; charset=utf-8");
 
@@ -54,7 +55,7 @@ public class EmailService {
 
         message.setFrom(new InternetAddress("sender@example.com"));
         message.setRecipients(MimeMessage.RecipientType.TO, "recipient@example.com");
-        message.setSubject("Test email from my Springapplication");
+        message.setSubject("Test email from my E_Marketplace");
 
         // Read the HTML template into a String variable
         String htmlTemplate = readFile("template.html");
@@ -89,23 +90,5 @@ public class EmailService {
         mailSender.send(message);
     }
 
-
-
 }
 
-
-
-
-//    String recipient = "john.doe@example.com";
-//    String subject = "Hello, ${firstName}!";
-//    String template = "Hello, ${firstName}!\n\n"
-//            + "This is a message just for you, ${firstName} ${lastName}. "
-//            + "We hope you're having a great day!\n\n"
-//            + "Best regards,\n"
-//            + "The Spring Boot Team";
-//
-//    Map<String, Object> variables = new HashMap<>();
-//variables.put("firstName", "John");
-//        variables.put("lastName", "Doe");
-//
-//        sendEmail(recipient, subject, template, variables);

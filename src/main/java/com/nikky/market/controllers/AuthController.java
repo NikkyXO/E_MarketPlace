@@ -30,27 +30,25 @@ public class AuthController {
 
   private final AuthenticationService service;
 
+  private final EmailService emailService;
+
   @PostMapping("/register")
   public ResponseEntity<RegisterResponse> register(
           @RequestBody RegisterRequest request
   ) {
-    var result = service.register(request);
-
     String Subject = "E-Commerce Application | Account Notification";
     String Message = "Hi " + request.getFirstName() + ", \n Your Account setup completed \n" +
             "WAIT FOR APPROVAL\n" + request.getEmail();
 
-    EmailService.sendEmail(request.getEmail(), Subject, Message);
-    //return ResponseEntity.ok(service.register(request), HttpStatus.CREATED);
+    emailService.sendEmail(request.getEmail(), Subject, Message);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.register(request));
   }
 
   @PostMapping("/authenticate")
   public ResponseEntity<AuthResponse> authenticate(
           @RequestBody AuthenticationRequest request
   ) {
-    //ResponseEntity.ok("Hello from secured endpoint")
     return ResponseEntity.ok(service.authenticate(request));
 
   }

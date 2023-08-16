@@ -56,12 +56,20 @@ public class UserController {
 	}
 
 	@DeleteMapping(value="/user/{id}")
-	ResponseEntity<String> delete(@PathVariable("id") @Min(1) Long id) {
+	ResponseEntity<String> deleteById(@PathVariable("id") @Min(1) Long id) {
 		User user = userRepository.findById(id)
 				.orElseThrow(()->new ResourceNotFoundException("User with ID :"+id+" Not Found!"));
 
 		userRepository.deleteById(user.getId());
 		return ResponseEntity.ok().body("Employee deleted with success!");
+
+	}
+
+	@DeleteMapping(value="/deleteAll")
+	ResponseEntity<String> deleteAll() {
+
+		userRepository.deleteAll();
+		return ResponseEntity.ok().body("User Table has been cleared with success!");
 
 	}
 }
