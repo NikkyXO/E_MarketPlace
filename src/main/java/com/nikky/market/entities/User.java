@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -52,6 +53,9 @@ public class User implements UserDetails {
 	@JsonManagedReference // to avoid circular references, to be serialized normally
 	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Notification> notifications;
 
 
 
