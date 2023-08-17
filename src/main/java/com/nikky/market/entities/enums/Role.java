@@ -1,4 +1,4 @@
-package com.nikky.market.entities;
+package com.nikky.market.entities.enums;
 
 import java.util.Collections;
 import java.util.List;

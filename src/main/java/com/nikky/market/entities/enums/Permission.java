@@ -1,4 +1,4 @@
-package com.nikky.market.entities;
+package com.nikky.market.entities.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

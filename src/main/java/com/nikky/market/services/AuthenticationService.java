@@ -5,8 +5,9 @@ import com.nikky.market.authentication.AuthResponse;
 import com.nikky.market.authentication.AuthenticationRequest;
 import com.nikky.market.authentication.RegisterRequest;
 import com.nikky.market.authentication.RegisterResponse;
+import com.nikky.market.entities.enums.Role;
 import com.nikky.market.entities.Token;
-import com.nikky.market.entities.TokenType;
+import com.nikky.market.entities.enums.TokenType;
 import com.nikky.market.entities.User;
 import com.nikky.market.repositories.TokenRepository;
 import com.nikky.market.repositories.UserRepository;
@@ -36,7 +37,7 @@ public class AuthenticationService {
             .lastName(request.getLastName())
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
-            .role(request.getRole()) // Role.USER
+            .role(Role.USER) //
             .build();
 
     var savedUser = repository.save(user);

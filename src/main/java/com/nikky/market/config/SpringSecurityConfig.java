@@ -1,13 +1,12 @@
 package com.nikky.market.config;
 
 import com.nikky.market.authentication.jwt.JwtFilter;
-import com.nikky.market.entities.Permission;
-import com.nikky.market.entities.Role;
+import com.nikky.market.entities.enums.Permission;
+import com.nikky.market.entities.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;

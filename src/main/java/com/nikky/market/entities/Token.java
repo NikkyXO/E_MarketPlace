@@ -1,8 +1,7 @@
 package com.nikky.market.entities;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.nikky.market.entities.enums.TokenType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
