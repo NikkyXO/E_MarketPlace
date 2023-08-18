@@ -6,20 +6,16 @@ import com.nikky.market.entities.User;
 import com.nikky.market.errorHandling.errorClasses.ResourceNotFoundException;
 import com.nikky.market.repositories.NotificationRepository;
 import com.nikky.market.repositories.UserRepository;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 @Service
 @NoArgsConstructor
@@ -57,6 +53,15 @@ public class NotificationService {
         getNotification.setMessage(request.getMessage());
 
         return notificationRepository.save(getNotification);
+    }
+
+    public Page<Notification> getNotificationsByUser(Long userId, Integer pageNumber, Integer limit) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID: " + userId + " Not Found!"));
+
+
+        return notificationRepository.findByUser(userId, PageRequest.of(pageNumber, limit));
+
     }
 
 

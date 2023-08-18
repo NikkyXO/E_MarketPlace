@@ -7,6 +7,7 @@ import com.nikky.market.services.NotificationService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,14 @@ public class NotificationController {
             @Valid @RequestBody CreateNotificationRequest request) {
         return ResponseEntity.ok().body(notificationService.updateNotification(id, request));
 
+    }
+
+    // Implement Pagination
+    @GetMapping(value = "/notification/user")
+    public ResponseEntity<Page<Notification>> getUserNotifications(
+            @RequestParam(required=true) Long userId,
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "5") Integer limit) {
+        return ResponseEntity.ok().body(notificationService.getNotificationsByUser(userId, pageNumber, limit));
     }
 }
