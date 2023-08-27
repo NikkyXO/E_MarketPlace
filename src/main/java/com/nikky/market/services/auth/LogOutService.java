@@ -1,4 +1,4 @@
-package com.nikky.market.services;
+package com.nikky.market.services.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

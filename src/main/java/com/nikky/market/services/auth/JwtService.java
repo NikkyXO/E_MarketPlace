@@ -1,4 +1,4 @@
-package com.nikky.market.services;
+package com.nikky.market.services.auth;
 
 import com.nikky.market.repositories.TokenRepository;
 import io.jsonwebtoken.Claims;

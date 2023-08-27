@@ -1,4 +1,4 @@
-package com.nikky.market.services;
+package com.nikky.market.services.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nikky.market.authentication.AuthResponse;

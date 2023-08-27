@@ -1,4 +1,4 @@
-package com.nikky.market.services.impl;
+package com.nikky.market.services;
 
 import java.util.List;
 import java.util.Objects;

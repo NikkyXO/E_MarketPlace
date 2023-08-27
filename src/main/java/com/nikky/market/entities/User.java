@@ -50,6 +50,7 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
+
 	@JsonManagedReference // to avoid circular references, to be serialized normally
 	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;

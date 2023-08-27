@@ -1,14 +1,14 @@
-package com.nikky.market.entities;
+package com.nikky.market.entities.market;
 
+import com.nikky.market.entities.User;
 
-import java.util.Set;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="brands")
-public class Brand {
+@Table(name="products")
+public class Product {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,12 +30,18 @@ public class Brand {
 	private String name;
 	
 	private String description;
-	private String information;
 	
-	@OneToMany
-	private Set<Product> products;
+	private double price;
 	
-	@OneToOne
-	private User brandowner;
+	private boolean available;
+	
+	@ManyToOne
+	@JoinColumn(name="vendor_id")
+	private User vendor;
+	
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="category_id")
+	private Category category;
 
 }

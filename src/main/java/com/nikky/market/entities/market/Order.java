@@ -1,12 +1,12 @@
-package com.nikky.market.entities;
+package com.nikky.market.entities.market;
 
-import java.util.List;
-
+import com.nikky.market.entities.User;
+import com.nikky.market.entities.market.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,22 +19,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="carts")
-public class Cart {
+@Table(name="orders")
+public class Order {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	private double vatPrice;
-	private String summary;
-	private double deliveryfee;
-	private double total;
-	
-	
-	@OneToMany
-	private List<Order> orderItem;
+	private String description;
+	private int quantity;
 	
 	@OneToOne
-	private User buyer;
+	private Product orderItem;
+	
+	@ManyToOne
+	private User orderOwner;
 }

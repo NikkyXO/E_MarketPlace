@@ -1,6 +1,6 @@
-package com.nikky.market.services;
+package com.nikky.market.services.notification;
 
-import com.nikky.market.entities.CreateNotificationRequest;
+import com.nikky.market.entities.notifications.CreateNotificationRequest;
 import com.nikky.market.entities.Notification;
 import com.nikky.market.entities.User;
 import com.nikky.market.errorHandling.errorClasses.ResourceNotFoundException;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 @NoArgsConstructor

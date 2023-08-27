@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.nikky.market.entities.User;
 import com.nikky.market.repositories.UserRepository;
-import com.nikky.market.services.impl.UserServiceImpl;
+import com.nikky.market.services.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -71,5 +72,11 @@ public class UserController {
 		userRepository.deleteAll();
 		return ResponseEntity.ok().body("User Table has been cleared with success!");
 
+	}
+
+	@PostMapping(value = "/upload")
+	public ResponseEntity<String> uploadFile(MultipartFile newUpload) {
+
+		return ResponseEntity.ok("File uploaded successfully");
 	}
 }

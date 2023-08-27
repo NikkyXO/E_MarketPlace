@@ -1,10 +1,9 @@
 package com.nikky.market.controllers;
 
 import java.io.IOException;
-import java.net.URI;
 
 import com.nikky.market.authentication.RegisterResponse;
-import com.nikky.market.emails.EmailService;
+import com.nikky.market.services.email.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nikky.market.authentication.AuthResponse;
 import com.nikky.market.authentication.AuthenticationRequest;
 import com.nikky.market.authentication.RegisterRequest;
-import com.nikky.market.services.AuthenticationService;
+import com.nikky.market.services.auth.AuthenticationService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController

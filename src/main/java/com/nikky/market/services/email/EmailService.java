@@ -1,4 +1,4 @@
-package com.nikky.market.emails;
+package com.nikky.market.services.email;
 
 
 import jakarta.mail.MessagingException;

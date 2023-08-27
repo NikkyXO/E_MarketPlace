@@ -1,4 +1,4 @@
-package com.nikky.market.entities;
+package com.nikky.market.entities.notifications;
 
 import lombok.*;
 
